@@ -1,0 +1,28 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "isbn": "9783864906466",
+      "title": "Angular Workshop",
+      "author": "John Doe",
+      "pages": 250
+    },
+    {
+      "id": 2,
+      "isbn": "9783864900000",
+      "title": "Java Workshop",
+      "author": "John Aristovich",
+      "pages": 20
+    },
+    {
+      "id": 3,
+      "isbn": "9999864906466",
+      "title": "Angular DevProjects for Practice",
+      "author": "Lenon Doe",
+      "pages": 600
+    }
+  ],
+  "users": [
+    { "id": 1, "name": "Alice" }
+  ]
+}

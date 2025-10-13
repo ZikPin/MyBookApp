@@ -4,13 +4,18 @@ import {RouterModule, RouterOutlet} from "@angular/router";
 import {BrowserModule} from "@angular/platform-browser";
 import {providePrimeNG} from "primeng/config";
 import {Noir} from "./theme-preset";
+import {BookGalleryModule} from './book-gallery/book-gallery.module';
+import { provideHttpClient } from "@angular/common/http";
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         RouterModule,
-        BrowserModule],
+        BrowserModule,
+        BookGalleryModule
+    ],
     providers: [
+        provideHttpClient(),
         providePrimeNG({
             /* specify the theme preset you want */
             theme: {

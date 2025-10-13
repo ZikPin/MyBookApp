@@ -1,0 +1,9 @@
+:host {
+    ::ng-deep .book-gallery-panel {
+        width: 25rem;
+        padding: 10px;
+        margin: 10px;
+        display: inline-block;
+        overflow: hidden;
+    }    
+}

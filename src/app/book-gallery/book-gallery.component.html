@@ -1,0 +1,7 @@
+<p-dataview #dv [value]="getBooks()">
+    <ng-template #list let-books>
+        @for(book of books; track book.id) {
+            <app-book-gallery-panel [book]="book"></app-book-gallery-panel>
+        }
+    </ng-template>
+</p-dataview>
