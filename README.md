@@ -1,15 +1,14 @@
 # MyBookApp
 ## Description
-It is a small side project for SoftwareDev practice. A small book-blog (i.e., Bookmonkey-Api to Book gallery lol).
-Let's see how big this project gets :)
+It is a small side project for SoftwareDev practice. In theory it should retrieve data from DB and render a small book-blog out of it.
+Let's see how big the project gets :)
 
 ## Setup and stacks
 For this project, I am using:
 - Angular: frontend
   - Primeng for UI Library
   - Quil for text editing
-- Spring: backend
-- Postgress: DB
+- JSON-Server: mock-backend and DB (will be replaced by Spring and Postgress)
 
 ## Plans for new features
 - A dynamically generated page for each component
