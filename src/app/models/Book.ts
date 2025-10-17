@@ -5,4 +5,11 @@ export interface Book {
     genre: string;
     pages?: number;
     rating?: number;
+    backgroundColor?: string;
+    info?: Section[];
+}
+
+export interface Section {
+    title: string;
+    body: string;
 }

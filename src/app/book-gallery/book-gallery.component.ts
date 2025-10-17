@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BookGalleryService } from './book-gallery.service';
+import { BookService } from '../services/book.service';
 import { Book } from '../models/Book';
 import { Observable, map } from 'rxjs';
 
@@ -12,8 +12,8 @@ import { Observable, map } from 'rxjs';
 export class BookGalleryComponent {
   books$: Observable<Book[]>;
 
-  constructor(private bookService: BookGalleryService) {
-    this.books$ = this.bookService.getBooks();
+  constructor(private bookService: BookService) {
+    this.books$ = this.bookService.books$;
     this.books$.pipe(
       map((data) => {
         if (!data) {
