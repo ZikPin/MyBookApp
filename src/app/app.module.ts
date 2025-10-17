@@ -6,9 +6,10 @@ import {providePrimeNG} from "primeng/config";
 import {Noir} from "./theme-preset";
 import {BookGalleryModule} from './book-gallery/book-gallery.module';
 import { provideHttpClient } from "@angular/common/http";
+import { BookPageComponent } from './book-page/book-page.component';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, BookPageComponent],
     imports: [
         RouterModule,
         BrowserModule,

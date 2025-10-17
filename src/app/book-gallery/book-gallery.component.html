@@ -1,7 +1,9 @@
-<p-dataview #dv [value]="getBooks()">
-    <ng-template #list let-books>
-        @for(book of books; track book.id) {
-            <app-book-gallery-panel [book]="book"></app-book-gallery-panel>
-        }
+<p-dataview #dv [value]="(books$ | async) || []" [rows]="12" [paginator]="true" layout="grid">
+    <ng-template #grid let-books>
+        <div class="grid grid-cols-12 gap-4">
+            @for(book of books; track book.id) {
+                <app-book-gallery-panel [book]="book" class="inline-block col-span-4"></app-book-gallery-panel>
+            }
+        </div>
     </ng-template>
 </p-dataview>

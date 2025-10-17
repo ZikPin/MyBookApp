@@ -14,7 +14,7 @@ import { BookGalleryPanelModule } from "../book-gallery-panel/book-gallery-panel
     CardModule,
     BookGalleryPanelModule,
     DataViewModule,
-    SelectButtonModule
+    SelectButtonModule,
 ],
     exports: [
         BookGalleryComponent
