@@ -9,12 +9,19 @@
     </div>
 
     <div class=" flex-1 flex flex-col justify-even bg-surface-100 text-base p-5 rounded-b-3xl">
-        {{ story?.text }}
         @for(section of story?.text; track section) {
         <div>
             <span class="leading-10 font-semibold"> {{ section.title }} </span>
             <p class="align-top flex-1"> {{ section.body }} </p>
         </div> 
         }
+
+        <div class="flex self-center flex-1">
+            <p-button icon="pi pi-pencil" label="Edit" class="flex-none self-center mt-10" [routerLink]="'/book-page/' + story?.id + '/edit'">
+            </p-button>
+
+            <p-button icon="pi pi-trash" label="Delete" class="flex-none self-center mt-10 ml-10" severity="danger" (onClick)="deleteStory()">
+            </p-button>
+        </div>
     </div>
 </div>

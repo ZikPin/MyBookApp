@@ -6,6 +6,7 @@ import { StoryPageRoutingModule } from "./story-page-routing.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { ButtonModule } from "primeng/button";
 
 @NgModule({
     declarations: [StoryPageEditComponent, StoryPageViewComponent],
@@ -16,7 +17,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
         StoryPageRoutingModule, 
         ReactiveFormsModule, 
         InputTextModule, 
-        FloatLabelModule
+        FloatLabelModule,
+        ButtonModule
     ]
 })
 export class StoryPageModule {

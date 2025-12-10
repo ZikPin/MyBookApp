@@ -15,6 +15,7 @@ import { BadgeModule } from "primeng/badge";
 import { AvatarModule } from "primeng/avatar";
 import { AboutModule } from './about/about.module';
 import { StoryPageModule } from "./story/story-page.module";
+import { ButtonModule } from "primeng/button";
 
 @NgModule({
     declarations: [AppComponent],
@@ -28,7 +29,8 @@ import { StoryPageModule } from "./story/story-page.module";
         AvatarModule,
         NgIf,
         StoryPageModule,
-        AboutModule
+        AboutModule,
+        ButtonModule
     ],
     providers: [
         provideAnimationsAsync(),

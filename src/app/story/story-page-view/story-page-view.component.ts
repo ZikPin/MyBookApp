@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StoryService } from '../../services/story.service';
 import { Story } from '../../models/Story';
 import { Observable } from 'rxjs';
@@ -16,6 +16,7 @@ export class StoryPageViewComponent {
 
   constructor(
     private router: ActivatedRoute,
+    private route: Router,
     private storyService: StoryService
   ) {
     this.id = router.snapshot.params["id"];
@@ -25,4 +26,16 @@ export class StoryPageViewComponent {
     });
   }
 
+  deleteStory() {
+    this.storyService.deleteStory(this.id).subscribe({
+      next: () => {
+        console.log('Story deleted successfully!');
+      },
+      error: (err) => {
+        console.error('Failed to delete story:', err);
+      }
+    });
+
+    this.route.navigate(['/book-gallery']);
+  }
 }
