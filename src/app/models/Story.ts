@@ -1,12 +1,10 @@
-export interface Book {
+export interface Story {
     id: number;
     title: string;
     author: string;
-    genre: string;
-    pages?: number;
-    rating?: number;
+    tags?: string[];
     backgroundColor?: string;
-    info?: Section[];
+    text?: Section[];
 }
 
 export interface Section {

@@ -1,0 +1,15 @@
+<div class="p-10 flex flex-col h-full">
+    <div class="flex-none h-10 rounded-t-3xl" [style]="{'background-color': formGroup.get('backgroundColor')?.value}">
+    </div>
+
+    <form [formGroup]="formGroup" class="flex flex-col gap-5 mt-5">
+        <p-floatlabel variant="on">
+            <input pInputText id="storyTitle" type="text" formControlName="title">
+            <label for="on_label">Title</label>
+        </p-floatlabel>
+
+        <input class="flex-1" pInputText id="storyAuthor" type="text" formControlName="author" placeholder="Author:">
+
+        <input pInputText id="storyBackgroundColor" type="text" formControlName="backgroundColor" />
+    </form>
+</div>

@@ -1,16 +1,16 @@
 import { NgModule } from "@angular/core";
-import { BookPageEditComponent } from "./book-page-edit/book-page-edit.component";
-import { BookPageViewComponent } from "./book-page-view/book-page-view.component";
+import { StoryPageEditComponent } from "./story-page-edit/story-page-edit.component";
+import { StoryPageViewComponent } from "./story-page-view/story-page-view.component";
 import { Route, RouterModule } from "@angular/router";
 
 export const routes: Route[] = [
     {
         path: 'book-page/:id/edit',
-        component: BookPageEditComponent
+        component: StoryPageEditComponent
     },
     {
         path: 'book-page/:id/view',
-        component: BookPageViewComponent
+        component: StoryPageViewComponent
     }
 ]
 
@@ -18,5 +18,5 @@ export const routes: Route[] = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class BookPageRoutingModule {
+export class StoryPageRoutingModule {
 }

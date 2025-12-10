@@ -7,13 +7,10 @@ module.exports = () => {
   for (let i = 0; i < 20; i++) {
     book = {
       id: i,
-      genre: faker.book.genre(),
       title: faker.book.title(),
       author: faker.book.author(),
-      pages: (i + 100) % 200,
-      rating: i % 5,
       backgroundColor: randomBackground(),
-      info: randomSentence(Math.floor(Math.random() * 4) + 2)
+      text: randomSections(Math.floor(Math.random() * 4) + 2)
     };
 
     data.books.push(book)
@@ -47,7 +44,7 @@ function randomBackground() {
   return 'var(--p-' + color + '-' + value + ')';
 }
 
-function randomSentence(n) {
+function randomSections(n) {
   result = [];
 
   for (i = 0; i < n; i++) {

@@ -4,7 +4,7 @@ import {RouterModule, provideRouter} from "@angular/router";
 import {BrowserModule} from "@angular/platform-browser";
 import {providePrimeNG} from "primeng/config";
 import {Noir} from "./theme-preset";
-import {BookGalleryModule} from './book-gallery/book-gallery.module';
+import {StoryGalleryModule} from './story/story-gallery/story-gallery.module';
 import { provideHttpClient } from "@angular/common/http";
 import { routes } from './app.routes';
 import { HomeModule } from "./home/home.module";
@@ -14,20 +14,20 @@ import { MenuModule } from "primeng/menu";
 import { BadgeModule } from "primeng/badge";
 import { AvatarModule } from "primeng/avatar";
 import { AboutModule } from './about/about.module';
-import { BookPageModule } from "./book-page/book-page.module";
+import { StoryPageModule } from "./story/story-page.module";
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         RouterModule,
         BrowserModule,
-        BookGalleryModule,
+        StoryGalleryModule,
         HomeModule,
         MenuModule,
         BadgeModule,
         AvatarModule,
         NgIf,
-        BookPageModule,
+        StoryPageModule,
         AboutModule
     ],
     providers: [

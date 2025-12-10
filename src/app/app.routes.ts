@@ -1,18 +1,18 @@
 import { Route } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { BookGalleryComponent } from './book-gallery/book-gallery.component';
+import { StoryGalleryComponent } from './story/story-gallery/story-gallery.component';
 
 export const routes: Route[] = [
     { path: '', component: HomeComponent },
     {
         path: 'book-gallery',
-        component: BookGalleryComponent,
+        component: StoryGalleryComponent,
         title: 'Books Overview'
     },
     {
         path: 'book-page',
-        loadChildren: () => import('./book-page/book-page.module').then(m => m.BookPageModule)
+        loadChildren: () => import('./story/story-page.module').then(m => m.StoryPageModule)
     },
     {
         path: 'about',

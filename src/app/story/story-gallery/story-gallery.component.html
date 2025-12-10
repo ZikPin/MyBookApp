@@ -1,0 +1,11 @@
+<div class="p-10">
+    <p-dataview #dv [value]="(stories$ | async) || []" [rows]="12" [paginator]="true" layout="grid">
+        <ng-template #grid let-stories>
+            <div class="grid grid-cols-12 gap-4">
+                @for(story of stories; track story.id) {
+                    <app-story-gallery-panel [story]='story' class="inline-block col-span-4"></app-story-gallery-panel>
+                }
+            </div>
+        </ng-template>
+    </p-dataview>
+</div>
