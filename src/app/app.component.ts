@@ -10,7 +10,7 @@ import { MenuItem } from 'primeng/api';
 export class AppComponent implements OnInit{
   title = 'my-book-app';
   items: MenuItem[] = [];
-  
+
   ngOnInit() {
     this.items = [
       {

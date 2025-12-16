@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <div class="flex flex-row relative">
     <div class="flex-none relative">
         <p-menu [model]="items" class="flex justify-center sticky top-0 h-screen" styleClass="w-full md:w-60">
@@ -16,11 +18,17 @@
     <div class="w-full">
         <router-outlet></router-outlet>
     </div>
-    <p-button 
+
+    <!-- <p-button 
         class='fixed right-5 bottom-5' 
         icon="pi pi-plus" 
         [rounded]="true" 
         [outlined]="false" 
         [raised]="true" 
-        size="large"/>
+        size="large"
+        (onClick)="addStoryDialogVisible = true"/>
+
+    <p-dialog header="Add a Story" [modal]="true" [(visible)]="addStoryDialogVisible" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+        
+    </p-dialog> -->
 </div>

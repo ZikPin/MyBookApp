@@ -1,15 +1,52 @@
-<div class="p-10 flex flex-col h-full">
-    <div class="flex-none h-10 rounded-t-3xl" [style]="{'background-color': formGroup.get('backgroundColor')?.value}">
-    </div>
+<div>
+    <form [formGroup]="formGroup" class="flex flex-col gap-5 mt-2 p-5" (ngSubmit)="editStory()">
+        <div class="flex-none h-10 rounded-t-3xl" [style]="{'background-color': backgroundColor.value}"></div>
 
-    <form [formGroup]="formGroup" class="flex flex-col gap-5 mt-5">
-        <p-floatlabel variant="on">
-            <input pInputText id="storyTitle" type="text" formControlName="title">
-            <label for="on_label">Title</label>
-        </p-floatlabel>
+        <div class="flex gap-5">
+            <p-floatLabel variant="on" class="flex-1">
+                <label for="on_label">Title: </label>
+                <input pInputText type="text" formControlName='title' [fluid]="true">
+            </p-floatLabel>
 
-        <input class="flex-1" pInputText id="storyAuthor" type="text" formControlName="author" placeholder="Author:">
+            <p-floatLabel variant="on" class="flex-1">
+                <label for="on_label">Author: </label>
+                <input pInputText type="text" formControlName='author' [fluid]="true">
+            </p-floatLabel>
 
-        <input pInputText id="storyBackgroundColor" type="text" formControlName="backgroundColor" />
+            <app-discrete-color-picker [formControl]="backgroundColor"></app-discrete-color-picker>
+        </div>
+
+        <div formArrayName="text" class="flex flex-col gap-5">
+            <div class="flex">
+                <span class="flex-1 text-2xl font-bold">Adding the Text</span>
+                <p-button class="flex-1" label="Add a Section" type="button" (click)="addSection()"></p-button>
+            </div>
+
+            @for (textBlock of text.controls; track textBlock) {
+            <p-card>
+                <div [formGroupName]="$index" class="flex flex-col gap-5">
+                    <div class="flex gap-5">
+                        <p-floatLabel variant="on" class="flex-1">
+                            <label for="on_label">Title: </label>
+                            <input pInputText type="text" formControlName='title' [fluid]="true">
+                        </p-floatLabel>
+
+                        <p-button label="Remove the Section" type="button" (click)="removeSection($index)"></p-button>
+                    </div>
+
+                    <p-floatLabel variant="on" class="">
+                        <label for="on_label">Body: </label>
+                        <textarea pTextarea fluid rows="2" type="text" formControlName='body' [autoResize]="true">
+                    </textarea>
+                    </p-floatLabel>
+                </div>
+            </p-card>
+            }
+        </div>
+
+        <div class="flex gap-5">
+            <p-button class="flex-1" label="Edit" (click)="editStory()" [fluid]="true"></p-button>
+            <p-button class="flex-1" label="Cancel" (click)="addStoryDialogVisible = false" [fluid]="true"></p-button>
+        </div>
     </form>
 </div>

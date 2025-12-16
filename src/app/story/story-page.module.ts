@@ -7,10 +7,22 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from "primeng/button";
+import { DialogModule } from 'primeng/dialog';
+import { DividerModule } from 'primeng/divider';
+import { TextareaModule } from 'primeng/textarea';
+import { CardModule } from 'primeng/card';
+import { DiscreteColorPickerModule } from "../discrete-color-picker/discrete-color-picker.module";
 
 @NgModule({
-    declarations: [StoryPageEditComponent, StoryPageViewComponent],
-    exports: [StoryPageEditComponent, StoryPageViewComponent, StoryPageRoutingModule],
+    declarations: [
+        StoryPageEditComponent, 
+        StoryPageViewComponent,
+    ],
+    exports: [
+        StoryPageEditComponent, 
+        StoryPageViewComponent, 
+        StoryPageRoutingModule,
+    ],
     imports: [
         AsyncPipe, 
         JsonPipe, 
@@ -18,7 +30,12 @@ import { ButtonModule } from "primeng/button";
         ReactiveFormsModule, 
         InputTextModule, 
         FloatLabelModule,
-        ButtonModule
+        ButtonModule,
+        DialogModule,
+        DividerModule,
+        TextareaModule,
+        CardModule,
+        DiscreteColorPickerModule
     ]
 })
 export class StoryPageModule {
