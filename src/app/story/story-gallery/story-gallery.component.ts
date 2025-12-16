@@ -14,15 +14,5 @@ export class StoryGalleryComponent {
 
   constructor(private storyService: StoryService) {
     this.stories$ = this.storyService.stories$;
-    this.stories$.pipe(
-      map((data) => {
-        if (!data) {
-          return {};
-        } else {
-          return data;
-        }
-      })
-    );
   }
-
 }

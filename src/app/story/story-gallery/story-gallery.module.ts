@@ -9,13 +9,13 @@ import { StoryGalleryPanelModule } from "../story-gallery-panel/story-gallery-pa
 @NgModule({
     declarations: [StoryGalleryComponent],
     imports: [
-    AsyncPipe,
-    JsonPipe,
-    CardModule,
-    StoryGalleryPanelModule,
-    DataViewModule,
-    SelectButtonModule,
-],
+        AsyncPipe,
+        JsonPipe,
+        CardModule,
+        StoryGalleryPanelModule,
+        DataViewModule,
+        SelectButtonModule,
+    ],
     exports: [
         StoryGalleryComponent
     ]
