@@ -67,7 +67,7 @@ export class StoryService {
         );
     }
 
-    getNewId() {
+    getNewId(): number {
         let maxValue: number = 0;
 
         this.storiesSubject.value.map((story) => story.id).forEach((id) => {

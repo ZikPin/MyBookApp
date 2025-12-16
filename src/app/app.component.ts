@@ -10,6 +10,7 @@ import { MenuItem } from 'primeng/api';
 export class AppComponent implements OnInit{
   title = 'my-book-app';
   items: MenuItem[] = [];
+  addStoryDialogVisible: boolean = false;
 
   ngOnInit() {
     this.items = [
