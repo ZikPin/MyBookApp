@@ -52,7 +52,12 @@ export class StoryPageEditComponent implements AfterViewInit {
     // Setting title, author and background color
     this.formGroup.get('title')?.setValue(storyData.title);
     this.formGroup.get('author')?.setValue(storyData.author);
-    this.formGroup.get('backgroundColor')?.setValue(storyData.backgroundColor);
+
+    if (storyData.backgroundColor == undefined) {
+      this.formGroup.get('backgroundColor')?.setValue('var(--p-violet-300)');
+    } else {
+      this.formGroup.get('backgroundColor')?.setValue(storyData.backgroundColor);
+    }
 
     // Setting the sections
     const sectionsCount = storyData?.text?.length ? storyData.text?.length : 0;
@@ -64,7 +69,13 @@ export class StoryPageEditComponent implements AfterViewInit {
   editStory() {
     this.formGroup.controls['id'].setValue(this.id);
     console.log("The story was edited to: ", this.formGroup.value);
-    this.storyService.updateStory(this.id, this.formGroup.value).subscribe();
+    
+    if (this.storyService.storyExists(this.id)) {
+      this.storyService.updateStory(this.id, this.formGroup.value).subscribe();
+    } else {
+      this.storyService.addStory(this.formGroup.value).subscribe();
+    }
+    
     this.result.emit('saved');
   }
 

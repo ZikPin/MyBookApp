@@ -84,4 +84,16 @@ export class StoryService {
 
         return maxValue + 1;
     }
+
+    storyExists(id: number): boolean {
+        let result: boolean = false;
+        this.storiesSubject.value.forEach((story) => {
+            if (story.id == id) {
+                result = true;
+            }
+        });
+
+        console.log('Story with id: ' + id + ' is existing: ' + result);
+        return result;
+    }
 }
