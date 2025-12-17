@@ -1,5 +1,5 @@
 <div>
-    <form [formGroup]="formGroup" class="flex flex-col gap-5 mt-2 p-5" (ngSubmit)="editStory()">
+    <form [formGroup]="formGroup" class="flex flex-col gap-5" (ngSubmit)="editStory()">
         <div class="flex-none h-10 rounded-t-3xl" [style]="{'background-color': backgroundColor.value}"></div>
 
         <div class="flex gap-5">
@@ -46,7 +46,6 @@
 
         <div class="flex gap-5">
             <p-button class="flex-1" label="Done" (click)="editStory()" [fluid]="true"></p-button>
-            <p-button class="flex-1" label="Cancel" (click)="cancel()" [fluid]="true"></p-button>
         </div>
     </form>
 </div>

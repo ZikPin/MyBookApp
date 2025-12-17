@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StoryService } from '../../services/story.service';
 import { Story } from '../../models/Story';
-import { Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
+import { DialogService } from 'primeng/dynamicdialog';
+import { StoryPageEditComponent } from '../story-page-edit/story-page-edit.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-story-page-view',
@@ -16,25 +19,36 @@ export class StoryPageViewComponent {
   constructor(
     private router: ActivatedRoute,
     private route: Router,
-    private storyService: StoryService
+    private storyService: StoryService,
+    private dialogService: DialogService
   ) {
     this.id = router.snapshot.params["id"];
     this.stories$ = this.storyService.getStory(this.id);
-    this.stories$.subscribe( (data) => {
-      console.log(data);
-    });
   }
 
   deleteStory() {
-    this.storyService.deleteStory(this.id).subscribe({
-      next: () => {
-        console.log('Story deleted successfully!');
-      },
-      error: (err) => {
-        console.error('Failed to delete story:', err);
+    this.storyService.deleteStory(this.id).subscribe(() => this.route.navigate(['/book-gallery']));
+  }
+
+  editStory() {
+    console.log('Opening a dialogue for Story with id: ' + this.id);
+    const ref = this.dialogService.open(StoryPageEditComponent, {
+      header: 'Edit the Story',
+      width: '50vw',
+      modal: true,
+      closable: true,
+      inputValues: {
+        id: this.id
       }
     });
 
-    this.route.navigate(['/book-gallery']);
+    ref?.onChildComponentLoaded
+      .subscribe((instance: StoryPageEditComponent) => {
+        instance.result
+          .pipe(take(1))
+          .subscribe(result => {
+            ref.close(result);
+          });
+      });
   }
 }

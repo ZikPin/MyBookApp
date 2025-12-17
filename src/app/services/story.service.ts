@@ -1,36 +1,44 @@
 import { Injectable } from "@angular/core";
 import { Story } from "../models/Story";
-import { BehaviorSubject, Observable, tap } from "rxjs";
+import { BehaviorSubject, map, Observable, tap } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { MessageService } from "primeng/api";
 
-@Injectable({ 
+@Injectable({
     providedIn: 'root',
 })
 export class StoryService {
     baseUrl = 'http://localhost:3000/books';
 
-    storiesSubject: BehaviorSubject<Story[]> = new BehaviorSubject<Story[]>([]);
+    private storiesSubject: BehaviorSubject<Story[]> = new BehaviorSubject<Story[]>([]);
     stories$: Observable<Story[]> = this.storiesSubject.asObservable();
 
     constructor(private http: HttpClient,
         private messageService: MessageService
     ) {
-        this.getStories().subscribe(stories => {
+        this.loadStories();
+    }
+
+    loadStories() {
+        console.log('Loading the stories...');
+        this.http.get<Story[]>(this.baseUrl).subscribe(stories => {
             this.storiesSubject.next(stories);
         });
     }
 
-    getStories(): Observable<Story[]> {
-        return this.http.get<Story[]>(this.baseUrl);
-    }
-
     getStory(id: number): Observable<Story> {
-        return this.http.get<Story>(`${this.baseUrl}/${id}`)
+        console.log('Getting story with id: ' + id);
+        return this.storiesSubject.pipe(
+            map(story => {
+                const s = story.find(s => s.id == id);
+                if (s === undefined) return {id: 0, title: '', author: ''}
+                else return s
+            })
+        );
     }
 
     addStory(story: Story): Observable<Story> {
-        console.log('Adding the story...'); 
+        console.log('Adding a new story with id: ' + story.id);
         return this.http.post<Story>(this.baseUrl, story).pipe(
             tap(() => {
                 const updated = [story, ... this.storiesSubject.value];
@@ -55,13 +63,13 @@ export class StoryService {
         );
     }
 
-
     deleteStory(id: number): Observable<Object> {
         console.log('Deleting story with id ' + String(id) + '...');
         return this.http.delete(`${this.baseUrl}/${id}`).pipe(
             tap(() => {
-                const updated = this.storiesSubject.value.filter(b => b.id !== id);
+                const updated = this.storiesSubject.value.filter(b => b.id != id);
                 this.storiesSubject.next(updated);
+                console.log(this.storiesSubject.value);
                 this.messageService.add({ severity: 'contrast', summary: 'Story Deleted', detail: `Story with id ${id} is successfully deleted` });
             })
         );

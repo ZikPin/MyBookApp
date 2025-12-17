@@ -10,7 +10,7 @@
                     {{ story.title }}
                 </div>
 
-                <p-button icon="pi pi-pencil" [rounded]="true" [outlined]="true" class="flex-none">
+                <p-button icon="pi pi-pencil" [rounded]="true" [outlined]="true" class="flex-none" (onClick)="editStory()">
                 </p-button>
 
                 <p-button icon="pi pi-trash" [rounded]="true" [outlined]="false" class="flex-none" severity="danger" (onClick)="deleteStory()">

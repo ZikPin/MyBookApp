@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { StoryService } from '../../services/story.service';
 import { Story, Section } from '../../models/Story';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
@@ -8,9 +8,10 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
   standalone: false,
   templateUrl: './story-page-edit.component.html'
 })
-export class StoryPageEditComponent {
-  @Input({required: true}) id!: number;
+export class StoryPageEditComponent implements AfterViewInit {
+  @Input({ required: true }) id!: number;
   @Output() result: EventEmitter<'saved' | 'canceled'> = new EventEmitter();
+  
   storyData: Partial<Story> = {};
   formGroup: FormGroup;
 
@@ -23,15 +24,6 @@ export class StoryPageEditComponent {
   }
 
   constructor(private storyService: StoryService) {
-    if (this.id === undefined || this.id === -1) {
-      console.warn('The id is undefined or is equal to -1');
-      this.id = storyService.getNewId();
-      this.storyData = {};
-    } else {
-      console.log('Finding a story with id: ' + this.id);
-      this.storyService.getStory(this.id).subscribe((storyData) => {this.storyData = storyData});
-    }
-
     this.formGroup = new FormGroup({
       id: new FormControl<number>(this.id),
       backgroundColor: new FormControl<string>(''),
@@ -39,21 +31,34 @@ export class StoryPageEditComponent {
       author: new FormControl<string>(''),
       text: new FormArray([]),
     });
+  }
 
-    this.loadStory(this.storyData);
+  ngAfterViewInit(): void {
+    if (this.id === undefined || this.id === -1) {
+      console.warn('The id is undefined or is equal to -1');
+      this.id = this.storyService.getNewId();
+      this.storyData = {};
+      this.loadStory(this.storyData);
+    } else {
+      console.log('Finding a story with id: ' + this.id);
+      this.storyService.getStory(this.id).subscribe((storyData) => { 
+        this.storyData = storyData;
+        this.loadStory(this.storyData); 
+      });
+    }
   }
 
   loadStory(storyData: Partial<Story>) {
-      // Setting title, author and background color
-      this.formGroup.get('title')?.setValue(storyData.title);
-      this.formGroup.get('author')?.setValue(storyData.author);
-      this.formGroup.get('backgroundColor')?.setValue(storyData.backgroundColor);
+    // Setting title, author and background color
+    this.formGroup.get('title')?.setValue(storyData.title);
+    this.formGroup.get('author')?.setValue(storyData.author);
+    this.formGroup.get('backgroundColor')?.setValue(storyData.backgroundColor);
 
-      // Setting the sections
-      const sectionsCount = storyData?.text?.length ? storyData.text?.length : 0;
-      for (let sectionIndex = 0; sectionIndex < sectionsCount; sectionIndex++) {
-        this.addSection(storyData.text?.at(sectionIndex));
-      }
+    // Setting the sections
+    const sectionsCount = storyData?.text?.length ? storyData.text?.length : 0;
+    for (let sectionIndex = 0; sectionIndex < sectionsCount; sectionIndex++) {
+      this.addSection(storyData.text?.at(sectionIndex));
+    }
   }
 
   editStory() {
@@ -61,11 +66,6 @@ export class StoryPageEditComponent {
     console.log("The story was edited to: ", this.formGroup.value);
     this.storyService.updateStory(this.id, this.formGroup.value).subscribe();
     this.result.emit('saved');
-  }
-
-  cancel() {
-    console.log('Story editin was canceled');
-    this.result.emit('canceled');
   }
 
   addSection(section?: Section) {
