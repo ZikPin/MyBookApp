@@ -6,8 +6,7 @@ import { Observable, map } from 'rxjs';
 @Component({
   selector: 'app-story-gallery',
   standalone: false,
-  templateUrl: './story-gallery.component.html',
-  styleUrl: './story-gallery.component.scss'
+  templateUrl: './story-gallery.component.html'
 })
 export class StoryGalleryComponent {
   stories$: Observable<Story[]>;

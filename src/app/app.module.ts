@@ -4,7 +4,6 @@ import { RouterModule, provideRouter } from "@angular/router";
 import { BrowserModule } from "@angular/platform-browser";
 import { providePrimeNG } from "primeng/config";
 import { Noir } from "./theme-preset";
-import { StoryGalleryModule } from './story/story-gallery/story-gallery.module';
 import { provideHttpClient } from "@angular/common/http";
 import { routes } from './app.routes';
 import { HomeModule } from "./home/home.module";
@@ -28,7 +27,6 @@ import { MessageService } from "primeng/api";
     imports: [
         RouterModule,
         BrowserModule,
-        StoryGalleryModule,
         HomeModule,
         MenuModule,
         BadgeModule,

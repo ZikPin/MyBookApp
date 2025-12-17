@@ -1,22 +1,18 @@
-import { Component, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { StoryService } from '../../services/story.service';
 import { Story, Section } from '../../models/Story';
-import { Observable, Subscription } from 'rxjs';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-story-page-edit',
   standalone: false,
-  templateUrl: './story-page-edit.component.html',
-  styleUrl: './story-page-edit.component.scss'
+  templateUrl: './story-page-edit.component.html'
 })
-export class StoryPageEditComponent implements OnDestroy {
-  id: number;
-  stories$: Observable<Story>;
-  subscriptions: Subscription[] = [];
+export class StoryPageEditComponent {
+  @Input({required: true}) id!: number;
+  @Output() result: EventEmitter<'saved' | 'canceled'> = new EventEmitter();
+  storyData: Partial<Story> = {};
   formGroup: FormGroup;
-  addStoryDialogVisible: boolean = false;
 
   get text() {
     return this.formGroup.get('text') as FormArray;
@@ -26,12 +22,15 @@ export class StoryPageEditComponent implements OnDestroy {
     return this.formGroup.get('backgroundColor') as FormControl;
   }
 
-  constructor(
-    private router: ActivatedRoute,
-    private storyService: StoryService
-  ) {
-    this.id = router.snapshot.params["id"];
-    this.stories$ = this.storyService.getStory(this.id);
+  constructor(private storyService: StoryService) {
+    if (this.id === undefined || this.id === -1) {
+      console.warn('The id is undefined or is equal to -1');
+      this.id = storyService.getNewId();
+      this.storyData = {};
+    } else {
+      console.log('Finding a story with id: ' + this.id);
+      this.storyService.getStory(this.id).subscribe((storyData) => {this.storyData = storyData});
+    }
 
     this.formGroup = new FormGroup({
       id: new FormControl<number>(this.id),
@@ -41,37 +40,32 @@ export class StoryPageEditComponent implements OnDestroy {
       text: new FormArray([]),
     });
 
-
-    this.loadStory();
+    this.loadStory(this.storyData);
   }
 
-  loadStory() {
-    this.subscriptions.push(this.stories$.subscribe((storyData) => {
+  loadStory(storyData: Partial<Story>) {
       // Setting title, author and background color
       this.formGroup.get('title')?.setValue(storyData.title);
       this.formGroup.get('author')?.setValue(storyData.author);
       this.formGroup.get('backgroundColor')?.setValue(storyData.backgroundColor);
 
       // Setting the sections
-      const sectionsCount = storyData?.text?.length ? storyData?.text?.length : 0;
+      const sectionsCount = storyData?.text?.length ? storyData.text?.length : 0;
       for (let sectionIndex = 0; sectionIndex < sectionsCount; sectionIndex++) {
         this.addSection(storyData.text?.at(sectionIndex));
       }
-    })
-    );
-  }
-
-  ngOnDestroy(): void {
-    for (let i = 0; i < this.subscriptions.length; i++) {
-      this.subscriptions[i].unsubscribe();
-    }
   }
 
   editStory() {
     this.formGroup.controls['id'].setValue(this.id);
     console.log("The story was edited to: ", this.formGroup.value);
     this.storyService.updateStory(this.id, this.formGroup.value).subscribe();
-    this.addStoryDialogVisible = false;
+    this.result.emit('saved');
+  }
+
+  cancel() {
+    console.log('Story editin was canceled');
+    this.result.emit('canceled');
   }
 
   addSection(section?: Section) {

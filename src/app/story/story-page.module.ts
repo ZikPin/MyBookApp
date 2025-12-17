@@ -12,16 +12,26 @@ import { DividerModule } from 'primeng/divider';
 import { TextareaModule } from 'primeng/textarea';
 import { CardModule } from 'primeng/card';
 import { DiscreteColorPickerModule } from "../discrete-color-picker/discrete-color-picker.module";
+import { DialogService } from 'primeng/dynamicdialog';
+import { StoryGalleryPanelComponent } from "./story-gallery-panel/story-gallery-panel.component";
+import { RouterLink } from "@angular/router";
+import { StoryGalleryComponent } from "./story-gallery/story-gallery.component";
+import { SelectButtonModule } from "primeng/selectbutton";
+import { DataViewModule } from "primeng/dataview";
 
 @NgModule({
     declarations: [
         StoryPageEditComponent, 
         StoryPageViewComponent,
+        StoryGalleryPanelComponent,
+        StoryGalleryComponent
     ],
     exports: [
         StoryPageEditComponent, 
         StoryPageViewComponent, 
         StoryPageRoutingModule,
+        StoryGalleryPanelComponent,
+        StoryGalleryComponent
     ],
     imports: [
         AsyncPipe, 
@@ -35,7 +45,13 @@ import { DiscreteColorPickerModule } from "../discrete-color-picker/discrete-col
         DividerModule,
         TextareaModule,
         CardModule,
-        DiscreteColorPickerModule
+        DiscreteColorPickerModule,
+        RouterLink,
+        DataViewModule,
+        SelectButtonModule,
+    ],
+    providers: [
+        DialogService
     ]
 })
 export class StoryPageModule {

@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-story-page-view',
   standalone: false,
-  templateUrl: './story-page-view.component.html',
-  styleUrl: './story-page-view.component.scss'
+  templateUrl: './story-page-view.component.html'
 })
 export class StoryPageViewComponent {
   id: number;
