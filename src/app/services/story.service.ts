@@ -8,7 +8,7 @@ import { MessageService } from "primeng/api";
     providedIn: 'root',
 })
 export class StoryService {
-    baseUrl = 'http://localhost:3000/books';
+    baseUrl = '/api/stories';
 
     private storiesSubject: BehaviorSubject<Story[]> = new BehaviorSubject<Story[]>([]);
     stories$: Observable<Story[]> = this.storiesSubject.asObservable();
