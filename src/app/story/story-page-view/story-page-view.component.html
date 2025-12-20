@@ -9,10 +9,10 @@
     </div>
 
     <div class=" flex-1 flex flex-col justify-even bg-surface-100 text-base p-5 rounded-b-3xl">
-        @for(section of story?.text; track section) {
+        @for(section of story?.sections; track section) {
         <div>
-            <span class="leading-10 font-semibold"> {{ section.title }} </span>
-            <p class="align-top flex-1"> {{ section.body }} </p>
+            <span class="leading-10 font-semibold"> {{ section.section_title }} </span>
+            <p class="align-top flex-1"> {{ section.section_body }} </p>
         </div> 
         }
 

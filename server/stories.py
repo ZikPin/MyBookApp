@@ -1,4 +1,4 @@
-from flask import abort, make_response
+from flask import abort, make_response, jsonify
 from config import db
 from models import Story, story_schema, stories_schema
 
@@ -40,6 +40,7 @@ def update(id, story):
         update_story = story_schema.load(story, session=db.session)
         existing_story.title = update_story.title
         existing_story.author = update_story.author
+        existing_story.backgroundColor = update_story.backgroundColor
 
         db.session.merge(existing_story)
         db.session.commit()
@@ -55,6 +56,6 @@ def delete(id):
         db.session.delete(existing_story)
         db.session.commit()
 
-        return make_response(f"{id} successfully deleted", 200)
+        return jsonify({"message": f"successfully deleted {id}"}), 200
     else:
         abort(404, f"Story with id {id} not found")

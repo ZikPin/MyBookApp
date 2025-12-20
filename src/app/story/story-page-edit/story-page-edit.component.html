@@ -16,19 +16,19 @@
             <app-discrete-color-picker [formControl]="backgroundColor"></app-discrete-color-picker>
         </div>
 
-        <div formArrayName="text" class="flex flex-col gap-5">
+        <div formArrayName="sections" class="flex flex-col gap-5">
             <div class="flex">
                 <span class="flex-1 text-2xl font-bold">Adding the Text</span>
                 <p-button class="flex-1" label="Add a Section" type="button" (click)="addSection()"></p-button>
             </div>
 
-            @for (textBlock of text.controls; track textBlock) {
+            @for (textBlock of sections.controls; track textBlock) {
             <p-card>
                 <div [formGroupName]="$index" class="flex flex-col gap-5">
                     <div class="flex gap-5">
                         <p-floatLabel variant="on" class="flex-1">
                             <label for="on_label">Title: </label>
-                            <input pInputText type="text" formControlName='title' [fluid]="true">
+                            <input pInputText type="text" formControlName='section_title' [fluid]="true">
                         </p-floatLabel>
 
                         <p-button label="Remove the Section" type="button" (click)="removeSection($index)"></p-button>
@@ -36,7 +36,7 @@
 
                     <p-floatLabel variant="on" class="">
                         <label for="on_label">Body: </label>
-                        <textarea pTextarea fluid rows="2" type="text" formControlName='body' [autoResize]="true">
+                        <textarea pTextarea fluid rows="2" type="text" formControlName='section_body' [autoResize]="true">
                     </textarea>
                     </p-floatLabel>
                 </div>

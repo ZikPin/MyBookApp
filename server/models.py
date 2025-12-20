@@ -23,6 +23,7 @@ class Story(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     author = db.Column(db.String(32))
     title = db.Column(db.String(32))
+    backgroundColor = db.Column(db.String)
     sections = db.relationship(
         Section,
         backref="story",

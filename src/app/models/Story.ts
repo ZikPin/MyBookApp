@@ -4,10 +4,10 @@ export interface Story {
     author: string;
     tags?: string[];
     backgroundColor?: string;
-    text?: Section[];
+    sections?: Section[];
 }
 
 export interface Section {
-    title: string;
-    body: string;
+    section_title: string;
+    section_body: string;
 }

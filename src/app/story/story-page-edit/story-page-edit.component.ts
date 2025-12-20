@@ -15,8 +15,8 @@ export class StoryPageEditComponent implements AfterViewInit {
   storyData: Partial<Story> = {};
   formGroup: FormGroup;
 
-  get text() {
-    return this.formGroup.get('text') as FormArray;
+  get sections() {
+    return this.formGroup.get('sections') as FormArray;
   }
 
   get backgroundColor() {
@@ -29,7 +29,7 @@ export class StoryPageEditComponent implements AfterViewInit {
       backgroundColor: new FormControl<string>(''),
       title: new FormControl<string>(''),
       author: new FormControl<string>(''),
-      text: new FormArray([]),
+      sections: new FormArray([]),
     });
   }
 
@@ -60,9 +60,9 @@ export class StoryPageEditComponent implements AfterViewInit {
     }
 
     // Setting the sections
-    const sectionsCount = storyData?.text?.length ? storyData.text?.length : 0;
+    const sectionsCount = storyData?.sections?.length ? storyData.sections?.length : 0;
     for (let sectionIndex = 0; sectionIndex < sectionsCount; sectionIndex++) {
-      this.addSection(storyData.text?.at(sectionIndex));
+      this.addSection(storyData.sections?.at(sectionIndex));
     }
   }
 
@@ -80,24 +80,25 @@ export class StoryPageEditComponent implements AfterViewInit {
   }
 
   addSection(section?: Section) {
+    console.log(section)
     if (section) {
-      this.text.push(new FormGroup({
-        title: new FormControl(section.title),
-        body: new FormControl(section.body)
+      this.sections.push(new FormGroup({
+        section_title: new FormControl(section.section_title),
+        section_body: new FormControl(section.section_body)
       }));
     }
     else {
-      this.text.push(new FormGroup({
-        title: new FormControl(''),
-        body: new FormControl('')
+      this.sections.push(new FormGroup({
+        section_title: new FormControl(''),
+        section_body: new FormControl('')
       }));
     }
   }
 
   removeSection(index: number) {
     console.log("Removing section at index: " + index);
-    console.log(this.text.at(index).value);
-    this.text.removeAt(index);
-    console.log(this.text.value);
+    console.log(this.sections.at(index).value);
+    this.sections.removeAt(index);
+    console.log(this.sections.value);
   }
 }

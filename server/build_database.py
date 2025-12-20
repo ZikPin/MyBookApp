@@ -6,6 +6,7 @@ STORIES_SECTIONS = [
         "id": 0,
         "title": "Xemse",
         "author": "Nizami Gencevi",
+        "backgroundColor": "var(--p-violet-300)",
         "sections": [
             ("Leyli ve Mecnun", "Bir zamanlar Nizami leyli ve mecnunu yazdi"),
             ("Xosrov ve Shirin", "Amma sonra Xosrov ve Shirini de yazmaq isteyine dushdu"),
@@ -16,6 +17,7 @@ STORIES_SECTIONS = [
         "id": 1,
         "title": "Matilda",
         "author": "Ronald Dahl",
+        "backgroundColor": "var(--p-violet-300)",
         "sections": [
             ("Ogey Ana", "Bir gun oger ana, nese elemek isteyirdi amma teessuf alinmadi")
         ]
@@ -24,6 +26,7 @@ STORIES_SECTIONS = [
         "id": 2,
         "title": "Xeste",
         "author": "Anadolu Bashibelalinski",
+        "backgroundColor": "var(--p-violet-300)",
         "sections": [
             ("Bele de kitab olarmish", "Anadolu namusu ile bolushmek istedi"),
             ("Bu metne bir bax", "Camaat amma anadolunu basha dushmedi...")
@@ -35,7 +38,7 @@ with app.app_context():
     db.drop_all()
     db.create_all()
     for data in STORIES_SECTIONS:
-        new_story = Story(id=data.get('id'), title=data.get('title'), author=data.get('author'))
+        new_story = Story(id=data.get('id'), title=data.get('title'), author=data.get('author'), backgroundColor=data.get('backgroundColor'))
         for section_title, section_body in data.get('sections', []):
             new_story.sections.append(
                 Section(

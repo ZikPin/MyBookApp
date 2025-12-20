@@ -22,7 +22,7 @@
         </ng-template>
         <div class="flex flex-col gap-3 items-stretch">
             <p>
-               {{ story.text?.at(0)?.body?.substring(0, 150) }}
+               {{ story.sections?.at(0)?.section_body?.substring(0, 150) }}
             </p>
             <p-button label="Read More ->" class="flex-1" [fluid]="true" severity="secondary" [routerLink]="'/book-page/' + story.id + '/view'">
             </p-button>

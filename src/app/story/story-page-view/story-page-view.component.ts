@@ -22,7 +22,7 @@ export class StoryPageViewComponent {
     private storyService: StoryService,
     private dialogService: DialogService
   ) {
-    this.id = router.snapshot.params["id"];
+    this.id = Number(router.snapshot.params["id"]);
     this.stories$ = this.storyService.getStory(this.id);
   }
 

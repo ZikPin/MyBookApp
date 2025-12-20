@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Story } from '../../models/Story';
 import { StoryService } from '../../services/story.service';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { StoryPageEditComponent } from '../story-page-edit/story-page-edit.component';
 import { take } from 'rxjs';
 
