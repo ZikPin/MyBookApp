@@ -8,7 +8,7 @@ import { MessageService } from "primeng/api";
     providedIn: 'root',
 })
 export class StoryService {
-    baseUrl = '/api/stories';
+    baseUrl = '/api/stories/';
 
     private storiesSubject: BehaviorSubject<Story[]> = new BehaviorSubject<Story[]>([]);
     stories$: Observable<Story[]> = this.storiesSubject.asObservable();
@@ -49,7 +49,7 @@ export class StoryService {
     }
 
     updateStory(id: number, updatedStory: Story): Observable<Story> {
-        return this.http.put<Story>(`${this.baseUrl}/${id}`, updatedStory).pipe(
+        return this.http.put<Story>(`${this.baseUrl}${id}`, updatedStory).pipe(
             tap((serverStory) => {
                 this.storiesSubject.next(
                     this.storiesSubject.value.map(story =>
@@ -65,7 +65,7 @@ export class StoryService {
 
     deleteStory(id: number): Observable<Object> {
         console.log('Deleting story with id ' + String(id) + '...');
-        return this.http.delete(`${this.baseUrl}/${id}`).pipe(
+        return this.http.delete(`${this.baseUrl}${id}`).pipe(
             tap(() => {
                 const updated = this.storiesSubject.value.filter(b => b.id != id);
                 this.storiesSubject.next(updated);
