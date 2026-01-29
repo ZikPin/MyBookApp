@@ -4,6 +4,8 @@ import click
 import sqlite3
 from datetime import datetime
 
+from server.example_data import STORIES_SECTION
+
 def get_db():
     if 'db' not in g:
         g.db = sqlite3.connect(
@@ -32,6 +34,27 @@ def init_db_command():
     init_db()
     click.echo('Initialized the database')
 
+@click.command('fill-mock-data')
+def fill_db_command():
+    init_db()
+    click.echo('Initialized the database')
+
+    db = get_db()
+    for story in STORIES_SECTION:
+        db.execute(
+            'INSERT INTO story (id, title, author, backgroundColor)'
+            ' VALUES (?, ?, ?, ?)',
+            (story['id'], story['title'], story['author'], story['backgroundColor'],)
+        )
+        for section in story['sections']:
+            db.execute(
+                'INSERT INTO section (story_id, section_title, section_body)'
+                ' VALUES (?, ?, ?)',
+                (story['id'], section['section_title'], section['section_body'],)
+            ) 
+        
+    db.commit()
+
 sqlite3.register_converter(
     'timestamp', lambda x: datetime.fromisoformat(x.decode())
 )
@@ -39,3 +62,4 @@ sqlite3.register_converter(
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+    app.cli.add_command(fill_db_command)
