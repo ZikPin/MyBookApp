@@ -8,6 +8,7 @@
 /venv
 /__pycache__
 /server/__pycache__
+/server/schemas/__pycache__
 
 # Node
 /node_modules
@@ -40,6 +41,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+/instance
 
 # System files
 .DS_Store
