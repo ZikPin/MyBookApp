@@ -8,6 +8,7 @@ export interface Story {
 }
 
 export interface Section {
-    section_title: string;
-    section_body: string;
+    story_id?: number;
+    section_title?: string;
+    section_body?: string;
 }
